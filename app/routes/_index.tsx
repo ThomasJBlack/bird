@@ -1,5 +1,6 @@
 import { Heading } from "@radix-ui/themes";
 import { type MetaFunction } from "@remix-run/node";
+import { Link } from "~/components/link";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,7 +12,11 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <>
-      <Heading as="h1">Remix App Template</Heading>
+      <Heading as="h1">Bird Personality Test</Heading>
+
+      <br />
+      <br />
+      <Link to="/test">Take the test</Link>
     </>
   );
 }
