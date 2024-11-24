@@ -1,0 +1,27 @@
+node_modules
+/.pnp
+.pnp.js
+
+# misc
+.DS_Store
+*.pem
+/lab/
+
+# debug
+npm-debug.log*
+.pnpm-debug.log*
+
+# ignore all .env files
+.env*
+# except .env.sample
+!.env.sample
+
+# eslint
+.eslintcache
+
+/.cache
+/public/build
+/build
+
+# Local Netlify folder
+.netlify
