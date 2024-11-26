@@ -1,30 +1,30 @@
 /**
- * This is intended to be a basic starting point for linting in your app.
- * It relies on recommended configs out of the box for simplicity, but you can
- * and should modify this configuration to best suit your team's needs.
+ * ESLint configuration
+ * This serves as a starting point for linting in your app.
+ * It uses recommended configurations for simplicity but should be tailored to your team's needs.
  */
 
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
-  root: true,
+  root: true, // Restricts ESLint to the root directory
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: "latest", // Specifies ECMAScript version for linting
+    sourceType: "module", // Allows the use of ES modules
     ecmaFeatures: {
-      jsx: true,
+      jsx: true, // Enables linting for JSX syntax
     },
   },
   env: {
-    browser: true,
-    commonjs: true,
-    es6: true,
+    browser: true, // Defines browser global variables
+    commonjs: true, // Allows CommonJS syntax (e.g., `require`)
+    es6: true, // Enables ES6 globals and syntax
   },
 
-  // Base config
+  // Base configuration
   extends: ["eslint:recommended"],
 
   overrides: [
-    // React
+    // React configuration
     {
       files: ["**/*.{js,jsx,ts,tsx}"],
       plugins: ["react", "jsx-a11y"],
@@ -37,47 +37,60 @@ module.exports = {
       env: { es2020: true },
       settings: {
         react: {
-          version: "detect",
+          version: "detect", // Automatically detect the React version
         },
-        formComponents: ["Form"],
+        // Custom settings for JSX linting
+        formComponents: ["Form"], // Add custom form component detection
         linkComponents: [
           { name: "Link", linkAttribute: "to" },
           { name: "NavLink", linkAttribute: "to" },
         ],
         "import/resolver": {
-          typescript: {},
+          typescript: {}, // Ensures TypeScript files are properly resolved
         },
+      },
+      rules: {
+        // Add specific React rules if needed
       },
     },
 
-    // Typescript
+    // TypeScript configuration
     {
       files: ["**/*.{ts,tsx}"],
       plugins: ["@typescript-eslint", "import"],
       parser: "@typescript-eslint/parser",
+      extends: [
+        "plugin:@typescript-eslint/recommended", // TypeScript-specific rules
+        "plugin:import/recommended", // Import rules
+        "plugin:import/typescript", // TypeScript-specific import rules
+      ],
       settings: {
-        "import/internal-regex": "^~/",
+        "import/internal-regex": "^~/", // Matches internal imports
         "import/resolver": {
           node: {
-            extensions: [".ts", ".tsx"],
+            extensions: [".ts", ".tsx"], // Resolves .ts and .tsx extensions
           },
           typescript: {
-            alwaysTryTypes: true,
+            alwaysTryTypes: true, // Ensures type packages are considered
           },
         },
       },
-      extends: [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:import/recommended",
-        "plugin:import/typescript",
-      ],
+      rules: {
+        // Add TypeScript-specific rules if needed
+      },
     },
 
-    // Node
+    // Node.js configuration
     {
-      files: [".eslintrc.json"],
+      files: ["**/*.js"], // Only applies to JS files in Node environments
+      extends: ["eslint:recommended", "prettier"], // Includes Prettier for code formatting
       env: {
-        node: true,
+        es2020: true,
+        node: true, // Defines Node.js global variables
+      },
+      rules: {
+        "no-empty": "off", // Disables the no-empty rule
+        "react/display-name": "off", // Avoids requiring display names for React components
       },
     },
   ],
